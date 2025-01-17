@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies-Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="stylesheet" href="Css/all.min.css">
+    <link rel="stylesheet" href="../src/styles/output.css">
+</head>
+<body class="relative flex justify-center items-center min-h-screen bg-[url('../../public/assets/back.jpg')] bg-no-repeat bg-cover bg-center">
+    <header class="fixed top-0 left-0 w-full p-[20px_100px] flex justify-between items-center z-[1]">
+        <h2 class="text-3xl text-white select-none">Movies API</h2>
+        <nav >
+            <a href="index.html" class="relative text-xl text-white no-underline font-medium ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left">Home</a>
+            <a href="about.html" class="relative text-xl text-white no-underline font-medium ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left">About</a>
+            <a href="contact.html" class="relative text-xl text-white no-underline font-medium ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left">Contact</a>
+            <button class="animate-borderPulse border-4 w-[130px] h-[50px] bg-transparent outline-none cursor-pointer rounded-lg text-xl text-white font-medium ml-10 transition-all duration-500 hover:bg-white hover:text-red-600 active:scale-90" id="nav-login-btn">Log in</button>
+        </nav>
+    </header>
+
+    <div class="text-white text-6xl py-[30px] uppercase text-center">
+        <h2 class="backdrop-blur-sm shadow-[10px_10px_10px_rgba(206,53,53,0.2)] rounded-[10px] font-courier">Discover the pulse of Cinema with the latest trendy movies, and more!</h2>
+              <p class="mt-[25px] text-[30px]">Login <span class="text-red-700 font-extrabold">Now!</span></p> 
+    </div>
+
+    <!-- Login Form -->
+    <div class="hidden absolute w-[420px] h-[500px] bg-transparent border-4 border-white/50 rounded-2xl backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] justify-center items-center overflow-hidden transition-[height] duration-200 ease-in-out" id="login-box">
+        <span class="z-10 absolute top-0 right-0 w-10 h-10 bg-red-500 text-3xl text-white flex justify-center items-center rounded-lg transition-all duration-500 hover:scale-105 hover:cursor-pointer active:scale-95" id="close-log"><i class="fa-solid fa-x"></i></span>
+        <div class="w-full p-5 transition-transform duration-150 ease-in-out translate-x-0">
+            <h2 class="text-3xl text-white text-center font-mono">Login</h2>
+            <p id="log-err-message" class="text-red-500 mt-2.5 text-xl"></p>
+            <form action="#" id="log-form">
+                <div class="relative w-full h-[50px] border-b border-b-[rgb(120,122,120)] my-[30px]" id="log-e-box">
+                    <span class="absolute right-2 text-base text-white leading-[55px]"><i class="fa-solid fa-envelope"></i></span>
+                    <input class="w-full h-full bg-transparent border-none outline-none text-sm font-semibold px-[25px] text-white placeholder:text-[15px] placeholder:text-white placeholder:opacity-70" type="email" required placeholder="Email" id="log-email">           
+                </div>
+                <div class="relative w-full h-[50px] border-b border-b-[rgb(120,122,120)] my-[30px]" id="log-p-box">
+                    <span class="absolute right-2 text-base text-white leading-[55px]"><i class="fa-solid fa-lock"></i></span>
+                    <input class="w-full h-full bg-transparent border-none outline-none text-sm font-semibold px-[25px] text-white placeholder:text-[15px] placeholder:text-white placeholder:opacity-70" type="password" required placeholder="Password" id="log-password" minlength="4">
+                </div>
+                <div class="text-sm text-white font-medium flex justify-between">
+                    <label><input class="accent-red-500 mr-1.25" type="checkbox">Remember me</label>
+                    <a href="#" class="no-underline text-white hover:underline">Forgot Password?</a>    
+                </div>
+                <button type="submit" class="w-full h-[45px] bg-[#ba1616] border-none outline-none rounded-lg cursor-pointer text-xl text-white my-[30px] transition-all duration-500 hover:bg-red-500 active:bg-red-800 active:scale-95" id="form-log-btn">Login</button>
+                <div class="text-base text-white text-center my-[25px] mb-[10px] font-medium">
+                    <p>Don't have an account?<a href="#" class="no-underline text-red-500 font-bold text-lg ml-5 hover:underline hover:decoration-[#650404]" id="reg-link">Register...</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- registeration Form -->
+    <div class="hidden absolute w-[420px] h-[525px] bg-transparent border-4 border-white/50 rounded-2xl backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] justify-center items-center overflow-hidden transition-[height] duration-200 ease-in-out" id="register-box">
+        <span class="z-10 absolute top-0 right-0 w-10 h-10 bg-red-500 text-3xl text-white flex justify-center items-center rounded-lg transition-all duration-500 hover:scale-105 hover:cursor-pointer active:scale-95" id="close-reg"><i class="fa-solid fa-x"></i></span>
+        <div class="w-full p-5 transition-transform duration-150 ease-in-out translate-x-0">
+            <h2 class="text-3xl text-white text-center font-mono">Registeration</h2>
+            <p id="reg-err-message" class="text-red-500 mt-2.5 text-xl"></p>
+            <form action="#" id="reg-form">
+                <div class="relative w-full h-[50px] border-b border-b-[rgb(120,122,120)] my-[30px]" >
+                    <span class="absolute right-2 text-base text-white leading-[55px]"><i class="fa-solid fa-user"></i></span>
+                    <input class="w-full h-full bg-transparent border-none outline-none text-sm font-semibold px-[25px] text-white placeholder:text-[15px] placeholder:text-white placeholder:opacity-70" type="text" required placeholder="UserName" id="reg-username">           
+                </div>
+                <div class="relative w-full h-[50px] border-b border-b-[rgb(120,122,120)] my-[30px]" id="reg-e-box">
+                    <span class="absolute right-2 text-base text-white leading-[55px]"><i class="fa-solid fa-envelope"></i></span>
+                    <input class="w-full h-full bg-transparent border-none outline-none text-sm font-semibold px-[25px] text-white placeholder:text-[15px] placeholder:text-white placeholder:opacity-70" type="email" required placeholder="Email" id="reg-email">           
+                </div>
+                <div class="relative w-full h-[50px] border-b border-b-[rgb(120,122,120)] my-[30px]" id="reg-p-box">
+                    <span class="absolute right-2 text-base text-white leading-[55px]"><i class="fa-solid fa-lock"></i></span>
+                    <input class="w-full h-full bg-transparent border-none outline-none text-sm font-semibold px-[25px] text-white placeholder:text-[15px] placeholder:text-white placeholder:opacity-70" type="password" required placeholder="Password" id="reg-password" minlength="4">
+                </div>
+                <button type="submit" class="w-full h-[45px] bg-[#ba1616] border-none outline-none rounded-lg cursor-pointer text-xl text-white my-[30px] transition-all duration-500 hover:bg-red-500 active:bg-red-800 active:scale-95" id="form-reg-btn">Register</button>
+                <div class="text-base text-white text-center my-[25px] mb-[10px] font-medium">
+                    <p>Already have an account?<a href="#" class="no-underline text-red-500 font-bold text-lg ml-5 hover:underline hover:decoration-[#650404]" id="login-link">Login...</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+
+    <script src="../src/auth.js"></script>
+
+</body>
+</html>
