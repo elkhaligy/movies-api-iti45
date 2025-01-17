@@ -733,10 +733,6 @@ video {
   border-radius: 0.5rem;
 }
 
-.border-2 {
-  border-width: 2px;
-}
-
 .border-4 {
   border-width: 4px;
 }
@@ -780,6 +776,10 @@ video {
 
 .bg-transparent {
   background-color: transparent;
+}
+
+.bg-\[url\(\'\.\.\/\.\.\/public\/assets\/back\.jpg\'\)\] {
+  background-image: url('../../public/assets/back.jpg');
 }
 
 .bg-\[url\(\'back\.jpg\'\)\] {
