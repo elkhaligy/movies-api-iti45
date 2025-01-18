@@ -1,16 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../src/styles/output.css" rel="stylesheet">
+    <link href="../src/styles/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <h1>Welcome to the Dashboard</h1>
-  <button id="logout">Logout</button>
+<div class="top_section">
+    <div class="navbar_container">
+        <div class="logo_and_menu">
+            <i class="fa-solid fa-clapperboard"></i>
+            <div class="menu_items">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">Series</a></li>
+                    <li><a href="#">Kids</a></li>
+                </ul>
+            </div>
+        </div>
 
-  <script src="../src/Dash.js"></script>
+        <div class="right_icons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-bell"></i>
+            <div class="profile_picture">H</div>
+            <i id="ham"class="fas fa-bars menu-toggle"></i> <!-- Hamburger icon -->
+        </div>
+    </div>
+
+    <div class="head_text_container">
+        <h2>Monsters, INC.</h2>
+        <p>Animated film that explores the world of Monstropolis,
+            where monsters generate their city's power by scaring
+            children at night.</p>
+        <div>
+            <button>Watch Now &nbsp; <i class="fa-solid fa-play"></i></button>
+            <button>Details &nbsp; <i class="fa-solid fa-chevron-right"></i></button>
+
+        </div>
+    </div>
+
+    <div class="trending_movies_container">
+        <h2>Trending Movies</h2>
+        <div class="trending_movies_cards">
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="movie_categories_container">
+    <div class="categories">
+        <button class="active_button">All Popular</button>
+        <button>Action</button>
+        <button>Animation</button>
+        <button>Adventure</button>
+        <button>Horror</button>
+        <button>Documentary</button>
+        <button>Romance</button>
+        <button>Kids</button>
+        <button>Comedy</button>
+    </div>
+
+    <div class="filtered_movies_container">
+        <h2>All Popular</h2>
+        <div class="filtered_movies_cards">
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('#ham').addEventListener('click', function() {
+        document.querySelector('.menu_items ul').classList.toggle('show');
+    });
+</script>
+<script src="../src/Dash.js"></script>
+
 </body>
 </html>
-
-

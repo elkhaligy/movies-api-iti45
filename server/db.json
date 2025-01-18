@@ -23,6 +23,12 @@
       "username": "khalid",
       "email": "khalidsd@gmail.com",
       "password": "asdda"
+    },
+    {
+      "id": "c8ef",
+      "username": "hello",
+      "email": "hello@gmail.com",
+      "password": "hello"
     }
   ]
 }

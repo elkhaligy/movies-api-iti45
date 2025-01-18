@@ -191,7 +191,7 @@ document.getElementById('log-form').addEventListener('submit', async (e) => {
             
                     // Redirect to dashboard
                     setTimeout(() => {
-                    window.location.href ='DashBoard.html';
+                    window.location.href ='dashboard.html';
                     }, 1000); // Redirect after 1 second
                 } 
 
@@ -212,7 +212,7 @@ document.getElementById('log-form').addEventListener('submit', async (e) => {
   // Prevent access to login page if already logged in
   window.addEventListener('load', () => {
     if (localStorage.getItem('isLoggedIn') === 'true' || localStorage.getItem('isSignedIn') === 'true' ) {
-      window.location.href = 'DashBoard.html';
+      window.location.href = 'dashboard.html';
     }
   });
   
@@ -258,7 +258,7 @@ async function addNewUser(username,email,password)
                                 localStorage.setItem('isSignedIn', 'true');
                         
                                 // Redirect to dashboard
-                                window.location.href = 'DashBoard.html';
+                                window.location.href = 'dashboard.html';
                             } 
                         else
                         {
