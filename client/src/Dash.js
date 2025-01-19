@@ -55,7 +55,8 @@ function showMovieDetails(movieId) {
   xhr.open('GET', MOVIE_URL, true);
 
   xhr.onload = function () {
-    if (xhr.status === 200) {
+    if (xhr.status === 200)
+       {
       const movie = JSON.parse(xhr.responseText);
       movieTitle.textContent = movie.title;
       moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
@@ -63,8 +64,10 @@ function showMovieDetails(movieId) {
       movieOverview.textContent = movie.overview;
       movieReleaseDate.textContent = `Release Date: ${movie.release_date}`;
       movieRating.textContent = `Rating: ${movie.vote_average}`;
-      modal.classList.add('show');
-    } else {
+      modal.style.display="flex";
+        }
+       else
+        {
       console.error('Error fetching movie details:', xhr.statusText);
     }
   };
@@ -98,10 +101,10 @@ function changePage(page) {
 }
 
 // Close modal
-function closeModal() {
-  modal.classList.remove('show');
-}
-
+var close=document.querySelector(".close");
+    close.addEventListener('click',function(){
+      modal.style.display="none"; 
+       });
 // Fetch initial trending movies
 fetchTrendingMovies(currentPage);
 

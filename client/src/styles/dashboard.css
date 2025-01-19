@@ -15,10 +15,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 9rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url('../../public/assets/background.jpg');
-
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url('../../public/assets/bat.jpg') no-repeat;
+    background-size: contain ;
     margin-bottom: 2rem;
 }
 
@@ -127,7 +125,7 @@ body {
 }
 
 .movie_card {
-    width: 15.33%;
+    width: 15%;
     border-radius: 12px;
     overflow: hidden;
 }
@@ -234,14 +232,22 @@ body {
 
 .movies {
     display: flex;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
   }
   .movie {
-    width: 200px;
+    width: 250px;
     text-align: center;
     cursor: pointer;
+    margin-bottom: 50px;
+  }
+  .movie:hover{
+    transform: scale(1.01);
+  }
+  .movie:active{
+    transform: scale(0.99);
   }
   .movie img {
     width: 100%;
@@ -250,64 +256,111 @@ body {
   .movie h3 {
     font-size: 1rem;
     margin: 10px 0;
+    font-weight: bold;
   }
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    overflow-y:scroll
-  }
-  .detail{
-    background-color: blue;
-    height: 100%;
-    width: 100%;
-  }
-  .modal.show {
-    visibility: visible;
-    opacity: 1;
-  }
-  .modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 500px;
-    width: 90%;
-    text-align: center;
-  }
-  .modal-content img {
-    width: 100%;
-    border-radius: 8px;
-  }
-  .modal-content h2 {
-    margin: 15px 0;
-  }
-  .modal-content p {
-    margin: 10px 0;
-  }
-  .close-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
+  
+  
+  
   .pagination {
     margin: 20px 0;
     text-align: center;
   }
   .pagination button {
     margin: 0 10px;
+    color: red;
+    border: 1px solid white;
     padding: 5px 15px;
     cursor: pointer;
+    border-radius: 10px;
+    transition: .5s ease;
+
   }
+
+  .pagination button:hover
+  {
+    transform: scale(1.03);
+    background-color: red;
+    color: white;
+    border: red;
+  }
+  .pagination button:active
+  {
+    transform: scale(0.97);
+  }
+
+
+
+
+
+
+
+
+
+.popup
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0,0.8);
+    display: none;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.popup h2{
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    color: red;
+    text-transform: uppercase;
+}
+
+.popup p{
+    font-size: 20px;
+    font-weight: 600;
+}
+.popup img
+ {
+    width: 25%;
+    height: 60%;
+    border-radius: 10px;
+}
+
+.close
+ {
+    position: absolute;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    background: rgba(120, 119, 119, 0.6);
+}
+.icon{
+    font-size: 24px;
+    color: white;
+    background: none;
+}
+
+.close
+ {
+    top: 15px;
+    right: 15px;
+}
+
+
+.close:hover
+ {
+    background: rgba(151, 25, 25);
+
+    transform: scale(1.05);
+    transition: 0.3s ease;
+} 
+.close:active
+{
+    transform: scale(0.95);
+}
