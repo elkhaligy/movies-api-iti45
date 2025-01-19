@@ -41,28 +41,40 @@
 
         </div>
     </div>
-
+    <!-- movies added to the page  -->
+    <div class="movies"></div>
+    <div class="pagination"></div>
+  <div class="detail">
+      <div class="modal" id="movieModal">
+          <div class="modal-content">
+            <h2 id="movieTitle"></h2>
+            <img id="moviePoster" src="" alt="">
+            <p id="movieOverview"></p>
+            <p><strong>Release Date:</strong> <span id="movieReleaseDate"></span></p>
+            <p><strong>Rating:</strong> <span id="movieRating"></span></p>
+            <button class="close-btn" onclick="closeModal() ">Close</button>
+          </div>
+        </div>
+  </div>
     <div class="trending_movies_container">
         <h2>Trending Movies</h2>
+    
         <div class="trending_movies_cards">
-            <div class="movie_card">
-                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
-            </div>
-            <div class="movie_card">
-                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
-            </div>
-            <div class="movie_card">
-                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
-            </div>
-            <div class="movie_card">
-                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
-            </div>
-            <div class="movie_card">
-                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
-            </div>
-            <div class="movie_card">
-                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
-            </div>
+           
+          <div class="movies"></div>
+          <div class="pagination"></div>
+        <div class="detail">
+            <div class="modal" id="movieModal">
+                <div class="modal-content">
+                  <h2 id="movieTitle"></h2>
+                  <img id="moviePoster" src="" alt="">
+                  <p id="movieOverview"></p>
+                  <p><strong>Release Date:</strong> <span id="movieReleaseDate"></span></p>
+                  <p><strong>Rating:</strong> <span id="movieRating"></span></p>
+                  <button class="close-btn" onclick="closeModal() ">Close</button>
+                </div>
+              </div>
+        </div>
         </div>
     </div>
 </div>
@@ -106,9 +118,7 @@
 </div>
 
 <script>
-    document.querySelector('#ham').addEventListener('click', function() {
-        document.querySelector('.menu_items ul').classList.toggle('show');
-    });
+   
 </script>
 <script src="../src/Dash.js"></script>
 
