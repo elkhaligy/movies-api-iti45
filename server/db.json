@@ -29,6 +29,12 @@
       "username": "hello",
       "email": "hello@gmail.com",
       "password": "hello"
+    },
+    {
+      "id": "46b4",
+      "username": "khaled",
+      "email": "dd@yahoo.com",
+      "password": "inter"
     }
   ]
 }
