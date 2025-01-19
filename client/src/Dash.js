@@ -9,7 +9,7 @@ const moviePoster = document.getElementById('moviePoster');
 const movieOverview = document.getElementById('movieOverview');
 const movieReleaseDate = document.getElementById('movieReleaseDate');
 const movieRating = document.getElementById('movieRating');
-
+const movieCard = document.getElementsByClassName("movie_card");
 // Global Variables
 let currentPage = 1;
 
@@ -128,3 +128,14 @@ window.addEventListener('load', () => {
   //     }
   //   window.location.href = 'index.html'; // Redirect to login page
   // });
+let currOffset = 0
+function nextSlide() {
+  currOffset -= 200;
+  moviesContainer.style.transform = `translateX(${currOffset}px)`;
+}
+
+function prevSlide() {
+  currOffset += 200;
+  moviesContainer.style.transform =  `translateX(${currOffset}px)`;
+
+}

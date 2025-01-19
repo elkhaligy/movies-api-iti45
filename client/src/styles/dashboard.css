@@ -119,17 +119,24 @@ body {
     margin-bottom: 1.5rem;
     color: white;
 }
+.trending_movies_container
+{
+    position: relative;
+    overflow: hidden;
 
+}
 .trending_movies_cards {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
     gap: 1.5rem;
+    transition: transform 0.5s ease-in-out;
 }
 
 .movie_card {
-    width: 15.33%;
+    min-width: 200px;
     border-radius: 12px;
     overflow: hidden;
+
 }
 
 .movie_card img {
@@ -138,29 +145,6 @@ body {
 }
 
 
-@media (max-width: 1200px) {
-    .movie_card {
-        width: 18%;
-    }
-}
-
-@media (max-width: 992px) {
-    .movie_card {
-        width: 22%;
-    }
-}
-
-@media (max-width: 768px) {
-    .movie_card {
-        width: 30%;
-    }
-}
-
-@media (max-width: 576px) {
-    .movie_card {
-        width: 45%;
-    }
-}
 
 .movie_categories_container {
     padding: 2.3rem;
@@ -311,3 +295,18 @@ body {
     padding: 5px 15px;
     cursor: pointer;
   }
+
+
+/*.prev, .next {*/
+/*    position: absolute;*/
+/*    top: 25rem;*/
+/*    left: 50%;*/
+/*    background-color: rgba(0, 0, 0, 0.1);*/
+/*    color: white;*/
+/*    border: none;*/
+/*    padding: 10px;*/
+/*    cursor: pointer;*/
+/*    border-radius: 50%;*/
+/*    font-size: 18px;*/
+/*    z-index: 10;*/
+/*}*/
