@@ -203,3 +203,4 @@ else if((localStorage.getItem('isLoggedIn') === 'true'))
 {
   profile.innerHTML=localStorage.getItem("LoggedName");
 }
+

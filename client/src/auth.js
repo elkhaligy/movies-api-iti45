@@ -169,6 +169,7 @@ document.getElementById('log-form').addEventListener('submit', async (e) => {
             // Store login status in localStorage
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('LoggedName', user.username);
+
             // Redirect to dashboard
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
