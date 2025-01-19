@@ -1,8 +1,7 @@
+// Global Constants
 const API_KEY = '55cbc13ab085a4e63cc2241e374000db';
 const BASE_URL = `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`;
-
-
-const moviesContainer = document.querySelector('.movies');
+const moviesContainer = document.querySelector('.trending_movies_cards');
 const paginationContainer = document.querySelector('.pagination');
 const modal = document.getElementById('movieModal');
 const movieTitle = document.getElementById('movieTitle');
@@ -11,6 +10,7 @@ const movieOverview = document.getElementById('movieOverview');
 const movieReleaseDate = document.getElementById('movieReleaseDate');
 const movieRating = document.getElementById('movieRating');
 
+// Global Variables
 let currentPage = 1;
 
 // Fetch trending movies
@@ -40,9 +40,9 @@ function fetchTrendingMovies(page = 1) {
 // Display movies
 function displayMovies(movies) {
   moviesContainer.innerHTML = movies.map(movie => `
-    <div class="movie" onclick="showMovieDetails(${movie.id})">
+    <div class="movie_card" onclick="showMovieDetails(${movie.id})">
       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-      <h3>${movie.title}</h3>
+<!--      <h3>${movie.title}</h3>-->
     </div>
   `).join('');
 }
@@ -115,16 +115,16 @@ window.addEventListener('load', () => {
   }
   });
 
-  // Logout functionality
-  document.getElementById('logout').addEventListener('click', () => {
-    if((localStorage.getItem('isSignedIn') === 'true'))
-      {
-        localStorage.removeItem('isSignedIn'); // Clear login status
-
-      }  
-    else if((localStorage.getItem('isLoggedIn') === 'true'))
-      {
-        localStorage.removeItem('isLoggedIn'); // Clear login status
-      }
-    window.location.href = 'index.html'; // Redirect to login page
-  });
+  // // Logout functionality
+  // document.getElementById('logout').addEventListener('click', () => {
+  //   if((localStorage.getItem('isSignedIn') === 'true'))
+  //     {
+  //       localStorage.removeItem('isSignedIn'); // Clear login status
+  //
+  //     }
+  //   else if((localStorage.getItem('isLoggedIn') === 'true'))
+  //     {
+  //       localStorage.removeItem('isLoggedIn'); // Clear login status
+  //     }
+  //   window.location.href = 'index.html'; // Redirect to login page
+  // });
