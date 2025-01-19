@@ -120,11 +120,25 @@ window.addEventListener('load', () => {
     if((localStorage.getItem('isSignedIn') === 'true'))
       {
         localStorage.removeItem('isSignedIn'); // Clear login status
-
+        localStorage.removeItem("SignedName");
       }  
     else if((localStorage.getItem('isLoggedIn') === 'true'))
       {
         localStorage.removeItem('isLoggedIn'); // Clear login status
+        localStorage.removeItem("LoggedName");
       }
     window.location.href = 'index.html'; // Redirect to login page
   });
+
+
+
+var profile=document.getElementById("prof-name");
+
+if((localStorage.getItem('isSignedIn') === 'true'))
+  {
+    profile.innerHTML=localStorage.getItem("SignedName")
+  }  
+else if((localStorage.getItem('isLoggedIn') === 'true'))
+  {
+    profile.innerHTML=localStorage.getItem("LoggedName");
+  }
