@@ -16,7 +16,6 @@ body {
     flex-direction: column;
     gap: 9rem;
     background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url('../../public/assets/background.jpg');
-
     background-size: cover;
     background-position: center;
     margin-bottom: 2rem;
@@ -62,6 +61,7 @@ body {
     font-size: 1.5rem;
 }
 
+
 .profile_picture {
     padding: 10px;
     width: auto;
@@ -74,7 +74,6 @@ body {
     color: white;
     font-weight: bold;
 }
-
 .head_text_container {
     display: flex;
     flex-direction: column;
@@ -119,17 +118,24 @@ body {
     margin-bottom: 1.5rem;
     color: white;
 }
+.trending_movies_container
+{
+    position: relative;
+    overflow: hidden;
 
+}
 .trending_movies_cards {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
 }
 
 .movie_card {
-    width: 15.33%;
+    min-width: 200px;
     border-radius: 12px;
     overflow: hidden;
+
 }
 
 .movie_card img {
@@ -138,29 +144,6 @@ body {
 }
 
 
-@media (max-width: 1200px) {
-    .movie_card {
-        width: 18%;
-    }
-}
-
-@media (max-width: 992px) {
-    .movie_card {
-        width: 22%;
-    }
-}
-
-@media (max-width: 768px) {
-    .movie_card {
-        width: 30%;
-    }
-}
-
-@media (max-width: 576px) {
-    .movie_card {
-        width: 45%;
-    }
-}
 
 .movie_categories_container {
     padding: 2.3rem;
@@ -168,7 +151,7 @@ body {
     background: black;
 }
 
-.movie_categories_container button {
+.movie_categories_container .categories button {
     padding: 0.5rem 1.1rem;
     font-size: 1.3rem;
     border: none;
@@ -177,7 +160,7 @@ body {
     color: white;
     background-color: rgba(255, 255, 255, 0.2);
 }
-.movie_categories_container .active_button
+.movie_categories_container .categories .active_button
 {
     color: black;
     background-color: white;
@@ -191,6 +174,9 @@ body {
     flex-wrap: wrap;
     gap: 1rem;
 }
+.filtered_movies_container {
+    overflow: hidden;
+}
 .filtered_movies_container h2 {
     font-size: 2.3rem;
     margin-bottom: 1.5rem;
@@ -199,9 +185,13 @@ body {
 
 .filtered_movies_cards {
     display: flex;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
     gap: 1.5rem;
+    transition: transform 0.5s ease-in-out;
+    scroll-behavior: smooth;
 }
+
+
 
 #ham {
     display: none;
@@ -311,3 +301,18 @@ body {
     padding: 5px 15px;
     cursor: pointer;
   }
+
+
+.slider_buttons {
+    margin-top: 1rem;
+    display: flex;
+    font-size: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+
+.movie_categories_container .prev, .movie_categories_container .next {
+    background: none;
+}

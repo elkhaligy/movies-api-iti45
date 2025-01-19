@@ -6,9 +6,12 @@
     <link href="../src/styles/output.css" rel="stylesheet">
     <link href="../src/styles/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Movies</title>
 </head>
 <body>
+<!-- Top Section Including Navbar, Text and Trending Movies -->
 <div class="top_section">
+<!--    Navigation Bar-->
     <div class="navbar_container">
         <div class="logo_and_menu">
             <i class="fa-solid fa-clapperboard"></i>
@@ -26,10 +29,11 @@
             <i class="fas fa-search"></i>
             <div class="profile_picture" id="prof-name"></div>
             <i id="ham"class="fas fa-bars menu-toggle"></i> <!-- Hamburger icon -->
-            <button class="animate-borderPulse border-4 w-[130px] h-[50px] bg-transparent outline-none cursor-pointer rounded-lg text-xl text-white font-medium ml-10 transition-all duration-500 hover:bg-white hover:text-red-600 active:scale-90" id="logout">Logout</button>
+            <button class=" border-4 w-[130px] h-[50px] bg-transparent outline-none cursor-pointer rounded-lg text-xl text-white font-medium  transition-all duration-500 hover:bg-white hover:text-red-600 active:scale-90" id="logout">Logout</button>
         </div>
     </div>
 
+<!--    Movie Text-->
     <div class="head_text_container">
         <h2>Monsters, INC.</h2>
         <p>Animated film that explores the world of Monstropolis,
@@ -41,44 +45,41 @@
 
         </div>
     </div>
-    <!-- movies added to the page  -->
-    <div class="movies"></div>
-    <div class="pagination"></div>
-  <div class="detail">
-      <div class="modal" id="movieModal">
-          <div class="modal-content">
+
+<!--    Trending Movie Cards Container-->
+    <div class="trending_movies_container">
+        <h2>Trending Movies</h2>
+        <div class="trending_movies_cards">
+<!--            <div class="movie_card">-->
+<!--                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">-->
+<!--            </div>-->
+
+
+        </div>
+<!--        <div class="pagination"></div>-->
+
+        <div class="slider_buttons">
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+</div>
+
+<!--Movies Details Modal (Hidden By Default)-->
+<div class="detail">
+    <div class="modal" id="movieModal">
+        <div class="modal-content">
             <h2 id="movieTitle"></h2>
             <img id="moviePoster" src="" alt="">
             <p id="movieOverview"></p>
             <p><strong>Release Date:</strong> <span id="movieReleaseDate"></span></p>
             <p><strong>Rating:</strong> <span id="movieRating"></span></p>
             <button class="close-btn" onclick="closeModal() ">Close</button>
-          </div>
-        </div>
-  </div>
-    <div class="trending_movies_container">
-        <h2>Trending Movies</h2>
-    
-        <div class="trending_movies_cards">
-           
-          <div class="movies"></div>
-          <div class="pagination"></div>
-        <div class="detail">
-            <div class="modal" id="movieModal">
-                <div class="modal-content">
-                  <h2 id="movieTitle"></h2>
-                  <img id="moviePoster" src="" alt="">
-                  <p id="movieOverview"></p>
-                  <p><strong>Release Date:</strong> <span id="movieReleaseDate"></span></p>
-                  <p><strong>Rating:</strong> <span id="movieRating"></span></p>
-                  <button class="close-btn" onclick="closeModal() ">Close</button>
-                </div>
-              </div>
-        </div>
         </div>
     </div>
 </div>
 
+<!-- Movie Categories Section -->
 <div class="movie_categories_container">
     <div class="categories">
         <button class="active_button">All Popular</button>
@@ -113,13 +114,25 @@
             <div class="movie_card">
                 <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
             </div>
+
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+            <div class="movie_card">
+                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">
+            </div>
+        </div>
+        <div class="slider_buttons">
+            <button class="prev" onclick="prevSlide2()">&#10094;</button>
+            <button class="next" onclick="nextSlide2()">&#10095;</button>
         </div>
     </div>
 </div>
 
-<script>
-   
-</script>
+
 <script src="../src/Dash.js"></script>
 
 </body>

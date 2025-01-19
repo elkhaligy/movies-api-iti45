@@ -169,7 +169,6 @@ document.getElementById('log-form').addEventListener('submit', async (e) => {
             // Store login status in localStorage
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('LoggedName', user.username);
-
             // Redirect to dashboard
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
@@ -206,6 +205,7 @@ async function addNewUser(username, email, password) {
 
         if (user) {
             document.getElementById('reg-err-message').textContent = 'Email is already exists';
+
         } else {
             const newUser = {
                 username: username,
