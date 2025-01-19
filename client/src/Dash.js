@@ -9,7 +9,7 @@ const moviePoster = document.getElementById('moviePoster'); // Element for movie
 const movieOverview = document.getElementById('movieOverview'); // Element for movie overview in modal
 const movieReleaseDate = document.getElementById('movieReleaseDate'); // Element for movie release date in modal
 const movieRating = document.getElementById('movieRating'); // Element for movie rating in modal
-
+let currNumOfMovies = 0;
 // Global Variables
 let currentPage = 1; // Current page for pagination
 
@@ -37,8 +37,28 @@ function fetchTrendingMovies(page = 1) {
   xhr.send(); // Send the request
 }
 
+function fetchAndReturnMovies(page = 1, callback) {
+  const xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
+  const API_URL = `${BASE_URL}&page=${page}`; // API URL with page number
+  xhr.open('GET', API_URL, true); // Initialize the request
+  xhr.onload = function () {
+    if (xhr.status === 200) { // If the request is successful
+      const data = JSON.parse(xhr.responseText); // Parse the response JSON
+      callback(data.results)
+    } else {
+      console.error('Error fetching trending movies:', xhr.statusText); // Log error if request fails
+      callback([])
+    }
+  };
+  xhr.onerror = function () {
+    console.error('Network error while fetching trending movies.'); // Log network errors
+  };
+  xhr.send(); // Send the request
+}
+
 // Display movies in the movies container
 function displayMovies(movies) {
+  currNumOfMovies = movies.length;
   moviesContainer.innerHTML = movies.map(movie => `
     <div class="movie_card" onclick="showMovieDetails(${movie.id})">
       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
@@ -115,13 +135,33 @@ window.addEventListener('load', () => {
 let currOffset = 0; // Current offset for sliding
 
 function nextSlide() {
-  currOffset -= 200; // Move to the next slide
+  currNumOfMovies -= 1;
+  console.log(`left movies: ${currNumOfMovies}`);
+  if (currNumOfMovies <= 7) {
+    currentPage += 1
+    // Fetch and append new movies
+    fetchAndReturnMovies(currentPage, (moviesArr) => {
+      console.log(moviesArr);
+      currNumOfMovies += moviesArr.length;
+      moviesContainer.innerHTML += moviesArr.map(movie => `
+    <div class="movie_card" onclick="showMovieDetails(${movie.id})">
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+    </div>
+  `).join('');
+    })
+
+  }
+  currOffset -= 220; // Move to the next slide
   moviesContainer.style.transform = `translateX(${currOffset}px)`; // Apply the transformation
 }
 
 function prevSlide() {
-  currOffset += 200; // Move to the previous slide
-  moviesContainer.style.transform = `translateX(${currOffset}px)`; // Apply the transformation
+
+  if (currOffset !== 0) {
+    currNumOfMovies += 1;
+    currOffset += 220; // Move to the previous slide
+    moviesContainer.style.transform = `translateX(${currOffset}px)`; // Apply the transformation
+  }
 }
 
 // Slider functionality for filtered movies
@@ -129,11 +169,11 @@ let currOffset2 = 0; // Current offset for sliding filtered movies
 const filteredMoviesContainer = document.querySelector(".filtered_movies_cards"); // Container for filtered movies
 
 function nextSlide2() {
-  currOffset2 -= 200; // Move to the next slide
+  currOffset2 -= 220; // Move to the next slide
   filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
 }
 
 function prevSlide2() {
-  currOffset2 += 200; // Move to the previous slide
+  currOffset2 += 220; // Move to the previous slide
   filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
 }
