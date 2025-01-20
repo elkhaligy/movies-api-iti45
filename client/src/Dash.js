@@ -9,9 +9,13 @@ const moviePoster = document.getElementById('moviePoster'); // Element for movie
 const movieOverview = document.getElementById('movieOverview'); // Element for movie overview in modal
 const movieReleaseDate = document.getElementById('movieReleaseDate'); // Element for movie release date in modal
 const movieRating = document.getElementById('movieRating'); // Element for movie rating in modal
-let currNumOfMovies = 0;
+const topSection = document.querySelector(".top_section");
+const headText = document.querySelector(".head_text_container h2");
+const paragraphText = document.querySelector(".head_text_container p");
+const detailsButton = document.getElementById("details-button");
 // Global Variables
 let currentPage = 1; // Current page for pagination
+let currNumOfMovies = 0;
 
 // Fetch trending movies from TMDB API
 function fetchTrendingMovies(page = 1) {
@@ -58,9 +62,22 @@ function fetchAndReturnMovies(page = 1, callback) {
 
 // Display movies in the movies container
 function displayMovies(movies) {
+  movieData = movies[0]
+  const backdropPath = movieData.backdrop_path;
+  const backdropUrl = `https://image.tmdb.org/t/p/original${backdropPath}`;
+  // // console.log('Backdrop URL:', backdropUrl);
+  //
+  // // Use the backdrop URL (e.g., set it as a background image)
+  topSection.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url(${backdropUrl})`
+  paragraphText.innerHTML = movieData.overview
+  headText.innerHTML = movieData.original_title
+  detailsButton.setAttribute("movieId", movies[0].id)
+
   currNumOfMovies = movies.length;
   moviesContainer.innerHTML = movies.map(movie => `
-    <div class="movie_card" onclick="showMovieDetails(${movie.id})">
+<!--    <div class="movie_card" onclick="showMovieDetails(${movie.id})">-->
+    <div class="movie_card" movieId="${movie.id}">
+    
       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
     </div>
   `).join(''); // Map through movies and create HTML for each movie card
@@ -144,7 +161,9 @@ function nextSlide() {
       console.log(moviesArr);
       currNumOfMovies += moviesArr.length;
       moviesContainer.innerHTML += moviesArr.map(movie => `
-    <div class="movie_card" onclick="showMovieDetails(${movie.id})">
+<!--    <div class="movie_card" onclick="showMovieDetails(${movie.id})">-->
+    <div class="movie_card">
+    
       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
     </div>
   `).join('');
@@ -203,3 +222,40 @@ else if((localStorage.getItem('isLoggedIn') === 'true'))
 {
   profile.innerHTML=localStorage.getItem("LoggedName");
 }
+
+console.log(topSection)
+
+moviesContainer.addEventListener('click', (event) => {
+  movieId = event.target.closest(".movie_card").getAttribute("movieId")
+  const xhr = new XMLHttpRequest();
+  const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
+  xhr.open('GET', url, true);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // Parse the response JSON
+      const movieData = JSON.parse(xhr.responseText);
+      console.dir(movieData)
+      // Get the backdrop path
+      const backdropPath = movieData.backdrop_path;
+      const backdropUrl = `https://image.tmdb.org/t/p/original${backdropPath}`;
+      // console.log('Backdrop URL:', backdropUrl);
+
+      // Use the backdrop URL (e.g., set it as a background image)
+      topSection.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url(${backdropUrl})`
+      paragraphText.innerHTML = movieData.overview
+      headText.innerHTML = movieData.original_title
+      detailsButton.setAttribute("movieId", movieId)
+    } else {
+      console.error('Error fetching movie details:', xhr.statusText);
+    }
+  };
+  xhr.onerror = function () {
+    console.error('Network error while fetching movie details.');
+  };
+  xhr.send();
+
+})
+
+detailsButton.addEventListener('click', (event) => {
+  showMovieDetails(event.target.getAttribute("movieId"));
+})
