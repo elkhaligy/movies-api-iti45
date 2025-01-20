@@ -295,12 +295,14 @@ function displayFilteredMovies(movies) {
 }
 
 // Add event listeners to buttons
+const filteredMoviesHeader = document.querySelector(".filtered_movies_container h2");
 const buttons = document.querySelectorAll('.movie_categories_container .categories button');
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     // Remove 'active_button' class from all buttons
     buttons.forEach(btn => btn.classList.remove('active_button'));
-    
+    let currentChosenCategory = button.innerHTML
+    filteredMoviesHeader.innerHTML = currentChosenCategory
     // Add 'active_button' class to the clicked button
     button.classList.add('active_button');
       const genreId = button.getAttribute('data-genre');
