@@ -286,7 +286,7 @@ function displayFilteredMovies(movies) {
 
   movies.forEach(movie => {
     containerMoviesFiltered.innerHTML +=`
-      <div class="movie_card" movieId="${movie.id}">
+      <div class="movie_card" movieId="${movie.id}" onclick="showMovieDetails(${movie.id})">
     
       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
     </div>
