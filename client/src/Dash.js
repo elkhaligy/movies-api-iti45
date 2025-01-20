@@ -162,7 +162,7 @@ function nextSlide() {
       currNumOfMovies += moviesArr.length;
       moviesContainer.innerHTML += moviesArr.map(movie => `
 <!--    <div class="movie_card" onclick="showMovieDetails(${movie.id})">-->
-    <div class="movie_card">
+    <div class="movie_card" movieId="${movie.id}">
     
       <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
     </div>
