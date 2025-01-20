@@ -190,13 +190,17 @@ let currOffset2 = 0; // Current offset for sliding filtered movies
 const filteredMoviesContainer = document.querySelector(".filtered_movies_cards"); // Container for filtered movies
 
 function nextSlide2() {
-  currOffset2 -= 220; // Move to the next slide
-  filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
+    currOffset2 -= 220; // Move to the next slide
+    filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
+  
 }
 
 function prevSlide2() {
-  currOffset2 += 220; // Move to the previous slide
-  filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
+  if (currOffset2 !== 0) {
+
+    currOffset2 += 220; // Move to the previous slide
+    filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
+  }
 }
 
 // Logout functionality
@@ -295,12 +299,14 @@ function displayFilteredMovies(movies) {
 }
 
 // Add event listeners to buttons
+const filteredMoviesHeader = document.querySelector(".filtered_movies_container h2");
 const buttons = document.querySelectorAll('.movie_categories_container .categories button');
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     // Remove 'active_button' class from all buttons
     buttons.forEach(btn => btn.classList.remove('active_button'));
-    
+    let currentChosenCategory = button.innerHTML
+    filteredMoviesHeader.innerHTML = currentChosenCategory
     // Add 'active_button' class to the clicked button
     button.classList.add('active_button');
       const genreId = button.getAttribute('data-genre');
