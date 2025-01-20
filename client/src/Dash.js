@@ -190,13 +190,17 @@ let currOffset2 = 0; // Current offset for sliding filtered movies
 const filteredMoviesContainer = document.querySelector(".filtered_movies_cards"); // Container for filtered movies
 
 function nextSlide2() {
-  currOffset2 -= 220; // Move to the next slide
-  filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
+    currOffset2 -= 220; // Move to the next slide
+    filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
+  
 }
 
 function prevSlide2() {
-  currOffset2 += 220; // Move to the previous slide
-  filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
+  if (currOffset2 !== 0) {
+
+    currOffset2 += 220; // Move to the previous slide
+    filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
+  }
 }
 
 // Logout functionality
