@@ -1,6 +1,7 @@
 // Global Constants
 const API_KEY = '55cbc13ab085a4e63cc2241e374000db'; // API key for TMDB
 const BASE_URL = `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`; // Base URL for trending movies
+
 const moviesContainer = document.querySelector('.trending_movies_cards'); // Container for trending movies
 const paginationContainer = document.querySelector('.pagination'); // Container for pagination buttons
 const modal = document.getElementById('movieModal'); // Modal for displaying movie details
@@ -13,6 +14,7 @@ const topSection = document.querySelector(".top_section");
 const headText = document.querySelector(".head_text_container h2");
 const paragraphText = document.querySelector(".head_text_container p");
 const detailsButton = document.getElementById("details-button");
+
 // Global Variables
 let currentPage = 1; // Current page for pagination
 let currNumOfMovies = 0;
@@ -259,3 +261,52 @@ moviesContainer.addEventListener('click', (event) => {
 detailsButton.addEventListener('click', (event) => {
   showMovieDetails(event.target.getAttribute("movieId"));
 })
+
+
+//=====================================================================================
+//filter section
+//=====================================================================================
+const urlForFelters = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=`
+
+
+
+async function fetchFilteredMovies(genreId) {
+  try {
+      const response = await fetch(`${urlForFelters}${genreId}`);
+      const data = await response.json();
+      displayFilteredMovies(data.results);
+  } catch (error) {
+      console.error('Error fetching movies:', error);
+  }
+}
+
+function displayFilteredMovies(movies) {
+  const containerMoviesFiltered = document.querySelector(".filtered_movies_cards");
+  containerMoviesFiltered.innerHTML = ''; // Clear previous movies
+
+  movies.forEach(movie => {
+    containerMoviesFiltered.innerHTML +=`
+      <div class="movie_card" movieId="${movie.id}" onclick="showMovieDetails(${movie.id})">
+    
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+    </div>
+    `
+  });
+}
+
+// Add event listeners to buttons
+const buttons = document.querySelectorAll('.movie_categories_container .categories button');
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Remove 'active_button' class from all buttons
+    buttons.forEach(btn => btn.classList.remove('active_button'));
+    
+    // Add 'active_button' class to the clicked button
+    button.classList.add('active_button');
+      const genreId = button.getAttribute('data-genre');
+      fetchFilteredMovies(genreId);
+  });
+});
+
+// Fetch and display movies for the default genre (Action)
+fetchFilteredMovies(28);
