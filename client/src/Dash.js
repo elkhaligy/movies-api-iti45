@@ -1,7 +1,8 @@
 // Global Constants
 const API_KEY = '55cbc13ab085a4e63cc2241e374000db'; // API key for TMDB
 const BASE_URL = `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`; // Base URL for trending movies
-
+const searchInput = document.getElementById('searchInput');
+const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
 const moviesContainer = document.querySelector('.trending_movies_cards'); // Container for trending movies
 const paginationContainer = document.querySelector('.pagination'); // Container for pagination buttons
 const modal = document.getElementById('movieModal'); // Modal for displaying movie details
@@ -314,6 +315,79 @@ buttons.forEach(button => {
       fetchFilteredMovies(genreId);
   });
 });
+function showMovieSearched(movieId) {
+  const xhr = new XMLHttpRequest();
+  const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
+  xhr.open('GET', url, true);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      const movieData = JSON.parse(xhr.responseText);
+
+      // Update background image
+      const backdropPath = movieData.backdrop_path;
+      const backdropUrl = `https://image.tmdb.org/t/p/original${backdropPath}`;
+      topSection.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url(${backdropUrl})`;
+
+      // Update movie details
+      paragraphText.innerHTML = movieData.overview;
+      headText.innerHTML = movieData.original_title;
+      detailsButton.setAttribute('movieId', movieId);
+    } else {
+      console.error('Error fetching movie details:', xhr.statusText);
+    }
+  };
+  xhr.onerror = function () {
+    console.error('Network error while fetching movie details.');
+  };
+  xhr.send();
+}
+
+// Function to fetch movies based on search query
+async function searchMovies(query) {
+  if (query.trim() === '') {
+    searchResults.innerHTML = ''; // Clear results if input is empty
+    return;
+  }
+  try {
+    const response = await fetch(`${SEARCH_API}${query}`);
+    const data = await response.json();
+    // Display movie names styled as per the design
+    searchResults.innerHTML = data.results
+      .map(
+        (movie) => `
+          <div
+            role="button"
+          onclick="showMovieSearched(${movie.id})"
+            class="text-slate-800 flex w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100 cursor-pointer"
+          >
+            <div class="mr-4 grid place-items-center">
+              <img
+                alt="${movie.title}"
+                src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
+                class="relative inline-block h-12 w-12 !rounded-full object-cover object-center"
+              />
+            </div>
+            <div>
+              <h6 class="text-slate-800 font-medium">${movie.title}</h6>
+              <p class="text-slate-500 text-sm">
+                Release Date: ${movie.release_date || 'N/A'}
+              </p>
+            </div>
+          </div>
+        `
+      )
+      .join('');
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+  }
+}
+
+// Add event listener to input field for dynamic search
+searchInput.addEventListener('input', (e) => {
+  const query = e.target.value;
+  searchMovies(query);
+});
+
 
 // Fetch and display movies for the default genre (Action)
 fetchFilteredMovies(28);
