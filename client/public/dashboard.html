@@ -67,15 +67,20 @@
 
 <!--Movies Details Modal (Hidden By Default)-->
 <div class="detail">
-    <div class="modal" id="movieModal">
-        <div class="modal-content">
+
+    <div class="mod-container" id="movieModal">
+        <div class="popup" >
+            <button class="close"><i class="fa-solid fa-x icon" title="Close"></i></button>
             <h2 id="movieTitle"></h2>
-            <img id="moviePoster" src="" alt="">
-            <p id="movieOverview"></p>
-            <p><strong>Release Date:</strong> <span id="movieReleaseDate"></span></p>
-            <p><strong>Rating:</strong> <span id="movieRating"></span></p>
-            <button class="close-btn" onclick="closeModal() ">Close</button>
-        </div>
+            <div class="all-info">
+                <img id="moviePoster" src="" alt="">
+                <div class="text-info">
+                    <p id="movieOverview"></p>
+                    <p><strong>Realease Date:</strong> <span id="movieReleaseDate"></span></p>
+                    <p><strong>Rating:</strong> <span id="movieRating"></span></p>
+                </div>
+            </div>
+        </div>      
     </div>
 </div>
 
