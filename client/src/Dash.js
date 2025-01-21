@@ -332,6 +332,9 @@ function showMovieSearched(movieId) {
       paragraphText.innerHTML = movieData.overview;
       headText.innerHTML = movieData.original_title;
       detailsButton.setAttribute('movieId', movieId);
+      searchInput.value = movieData.title; // Add this line
+      // Clear search results and hide the list after selecting a movie
+      searchResults.innerHTML = '';  // Clear the search results list
     } else {
       console.error('Error fetching movie details:', xhr.statusText);
     }
@@ -381,6 +384,13 @@ async function searchMovies(query) {
     console.error('Error fetching movies:', error);
   }
 }
+// Add event listener to hide the results when clicking outside the search list
+document.addEventListener('mousedown', (e) => {
+  if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+    searchResults.innerHTML = ''; // Clear results if clicked outside
+  }
+});
+
 
 // Add event listener to input field for dynamic search
 searchInput.addEventListener('input', (e) => {
