@@ -13,17 +13,19 @@ const close_log = document.getElementById("close-log");
 
 
 log_btn.addEventListener("click", () => {
-    login.classList.remove('hidden');
+    login.classList.remove('hidden','opacity-0');
     login.classList.add('flex');
 });
 
 reg_link.addEventListener("click", () => {
     login.classList.add('hidden');
     login.classList.remove('flex');
-    register.classList.remove('hidden');
+
     register.classList.add('flex');
-    document.getElementById('log-email').value = "";
-    document.getElementById('log-password').value = "";
+    register.classList.remove('hidden','opacity-0');
+
+    var log_form = document.getElementById('log-form');
+    log_form.reset();
     document.getElementById('log-err-message').textContent = "";
 
     var box = document.getElementsByClassName('border-b');
@@ -85,12 +87,16 @@ function reset_colors(box) {
 }
 
 close_log.addEventListener("click", () => {
-    login.classList.add('hidden');
+    login.classList.add('opacity-0');
     login.classList.remove('flex');
+    login.addEventListener('transitionend', function() {
+        login.classList.add('hidden');
+    },{ once: true });
+
     var box = document.getElementsByClassName('border-b');
     reset_colors(box);
-    document.getElementById('log-email').value = "";
-    document.getElementById('log-password').value = "";
+    var log_form = document.getElementById('log-form');
+    log_form.reset();
     document.getElementById('reg-err-message').textContent = "";
     document.getElementById('log-err-message').textContent = "";
 });
@@ -107,23 +113,23 @@ const log_link = document.getElementById("login-link");
 
 log_link.addEventListener("click", () => {
     register.classList.add('hidden');
-    register.classList.remove('active');
+    register.classList.remove('flex');
     login.classList.remove('hidden');
-    login.classList.add('active');
-    document.getElementById('reg-username').value = "";
-    document.getElementById('reg-email').value = "";
-    document.getElementById('reg-password').value = "";
+    login.classList.add('flex');
+    var reg_form = document.getElementById('reg-form');
+    reg_form.reset();
     document.getElementById('reg-err-message').textContent = "";
-
     var box = document.getElementsByClassName('border-b');
     reset_colors(box);
 });
 close_reg.addEventListener("click", () => {
-    register.classList.add('hidden');
-    register.classList.remove('active');
-    document.getElementById('reg-username').value = "";
-    document.getElementById('reg-email').value = "";
-    document.getElementById('reg-password').value = "";
+    register.classList.add('opacity-0');
+    register.classList.remove('flex');
+    register.addEventListener('transitionend', function() {
+        register.classList.add('hidden');
+    },{ once: true });
+    var reg_form = document.getElementById('reg-form');
+    reg_form.reset();
     document.getElementById('reg-err-message').textContent = "";
     document.getElementById('log-err-message').textContent = "";
 
@@ -170,9 +176,11 @@ document.getElementById('log-form').addEventListener('submit', async (e) => {
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('LoggedName', user.username);
             // Redirect to dashboard
+            loader.classList.remove('invisible');
+            loader.classList.add('visible');
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
-            }, 1000); // Redirect after 1 second
+            },3000); // Redirect after 1 second
         } else {
             message.textContent = 'Invalid username or password.';
         }
