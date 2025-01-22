@@ -176,11 +176,11 @@ document.getElementById('log-form').addEventListener('submit', async (e) => {
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('LoggedName', user.username);
             // Redirect to dashboard
-            loader.classList.remove('invisible');
-            loader.classList.add('visible');
-            setTimeout(() => {
+            // loader.classList.remove('invisible');
+            // loader.classList.add('visible');
+            // setTimeout(() => {
                 window.location.href = 'dashboard.html';
-            },3000); // Redirect after 1 second
+            // },3000); // Redirect after 1 second
         } else {
             message.textContent = 'Invalid username or password.';
         }
@@ -258,5 +258,4 @@ document.getElementById('reg-form').addEventListener('submit', async (e) => {
         document.getElementById('reg-err-message').textContent = 'Invalid Email format';
     }
 });
-  
   
