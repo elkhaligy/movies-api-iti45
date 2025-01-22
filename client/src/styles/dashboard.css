@@ -39,3 +39,10 @@
 ::-webkit-scrollbar-thumb:hover{
     background: rgb(89, 24, 24);
 }
+
+.active_button
+{
+    color: black;
+    background-color: white;
+    font-weight: bold;
+}
