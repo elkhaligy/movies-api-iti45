@@ -15,7 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 6rem;
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url('../../public/assets/background.jpg');
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url('');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -68,7 +68,7 @@ body {
     padding: 10px;
     width: auto;
     height: 32px;
-    background-color: #252bc5;
+    background-color: red;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -109,7 +109,9 @@ body {
     border-radius: 2rem;
     color: white;
 }
-
+.details-btn:hover{
+color: red;
+}
 .head_text_container button:first-of-type {
     color: black;
     background-color: white;
@@ -143,7 +145,7 @@ body {
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-
+    transition: .3s ease;
 }
 .movie_card:hover
 {
@@ -258,21 +260,10 @@ body {
     margin: 10px 0;
   }
 
-  .detail{
-    background-color: blue;
-    height: 100%;
-    width: 100%;
-  }
-  
   
   .pagination {
     margin: 20px 0;
     text-align: center;
-  }
-  .pagination button {
-    margin: 0 10px;
-    padding: 5px 15px;
-    cursor: pointer;
   }
 
 
@@ -283,7 +274,18 @@ body {
     justify-content: center;
     align-items: center;
     gap: 3rem;
+    & .prev, .next{
+        transition: .2s ease;
+    }
 }
+.prev:hover, .next:hover
+  {
+    transform: scale(1.05);
+  }
+  .prev:active, .next:active
+  {
+    transform: scale(0.97);
+  }
 
 
 .movie_categories_container .prev, .movie_categories_container .next {
