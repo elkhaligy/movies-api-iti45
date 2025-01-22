@@ -399,3 +399,17 @@ searchInput.addEventListener('input', (e) => {
 
 // Fetch and display movies for the default genre (Action)
 fetchFilteredMovies(28);
+
+// button up
+const upButton = document.getElementById("upButton");
+window.onscroll = function() {
+    if (document.documentElement.scrollTop > 100) {
+        upButton.style.display = "block";
+    } else {
+        upButton.style.display = "none";
+    }
+};
+
+upButton.onclick = function() {
+    document.documentElement.scrollTop = 0;
+};
