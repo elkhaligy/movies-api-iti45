@@ -1,8 +1,28 @@
+
+var cats=document.getElementsByTagName("a");
+function clr_bold()
+{
+for(let i=0;i<cats.length;i++)
+{
+  if(cats[i].classList.contains("font-extrabold"))
+  {
+    cats[i].classList.remove("font-extrabold");
+  }
+}
+}
+const mvs=document.getElementById("Mvs");
+var type;
+if(mvs.classList.contains("font-extrabold"))
+{
+  type="movie";
+}
+else
+{
+  type="tv";
+}
 // Global Constants
 const API_KEY = '55cbc13ab085a4e63cc2241e374000db'; // API key for TMDB
-const BASE_URL = `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`; // Base URL for trending movies
 const searchInput = document.getElementById('searchInput');
-const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
 const moviesContainer = document.querySelector('.trending_movies_cards'); // Container for trending movies
 const paginationContainer = document.querySelector('.pagination'); // Container for pagination buttons
 const modal = document.getElementById('movieModal'); // Modal for displaying movie details
@@ -20,10 +40,12 @@ const loaderDiv = document.getElementById("loader")
 let currentPage = 1; // Current page for pagination
 let currNumOfMovies = 0;
 
+
+
 // Fetch trending movies from TMDB API
 function fetchTrendingMovies(page = 1) {
   const xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
-  const API_URL = `${BASE_URL}&page=${page}`; // API URL with page number
+  const API_URL = `https://api.themoviedb.org/3/trending/${type}/day?api_key=${API_KEY}&page=${page}`; // API URL with page number
 
   xhr.open('GET', API_URL, true); // Initialize the request
 
@@ -46,11 +68,11 @@ function fetchTrendingMovies(page = 1) {
 
 function fetchAndReturnMovies(page = 1, callback) {
   const xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
-  const API_URL = `${BASE_URL}&page=${page}`; // API URL with page number
+  const API_URL = `https://api.themoviedb.org/3/trending/${type}/day?api_key=${API_KEY}&page=${page}`; // API URL with page number
   xhr.open('GET', API_URL, true); // Initialize the request
   xhr.onload = function () {
     if (xhr.status === 200) { // If the request is successful
-      const data = JSON.parse(xhr.responseText); // Parse the response JSON
+      const data = JSON.parse(xhr.responseText); // Parse the response JSON      
       callback(data.results)
     } else {
       console.error('Error fetching trending movies:', xhr.statusText); // Log error if request fails
@@ -72,15 +94,25 @@ function displayMovies(movies) {
   //
   // // Use the backdrop URL (e.g., set it as a background image)
   topSection.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url(${backdropUrl})`
-  paragraphText.innerHTML = movieData.overview
-  headText.innerHTML = movieData.original_title
+  paragraphText.innerHTML = movieData.overview;
+const trend_header=document.getElementById("trend_header");
+
+  if(mvs.classList.contains("font-extrabold"))
+    {
+      headText.innerHTML = movieData.title;
+      trend_header.innerHTML= "Trending Movies";
+    }
+    else{
+      headText.innerHTML = movieData.original_name;
+      trend_header.innerHTML= "Trending Tv-Shows";
+    }
   detailsButton.setAttribute("movieId", movies[0].id)
 
   currNumOfMovies = movies.length;
   moviesContainer.innerHTML = movies.map(movie => `
     <div class="movie_card min-w-[200px] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.03] active:scale-[0.97]" movieId="${movie.id}">
     
-      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path} class="w-full block" alt="${movie.title}">
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path} class="w-full block">
     </div>
   `).join(''); // Map through movies and create HTML for each movie card
 }
@@ -88,18 +120,25 @@ function displayMovies(movies) {
 // Show detailed information about a movie in a modal
 function showMovieDetails(movieId) {
   const xhr = new XMLHttpRequest(); // Create a new XMLHttpRequest object
-  const MOVIE_URL = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`; // API URL for movie details
+  const MOVIE_URL = `https://api.themoviedb.org/3/${type}/${movieId}?api_key=${API_KEY}`; // API URL for movie details
 
   xhr.open('GET', MOVIE_URL, true); // Initialize the request
 
   xhr.onload = function () {
     if (xhr.status === 200) { // If the request is successful
       const movie = JSON.parse(xhr.responseText); // Parse the response JSON
-      movieTitle.textContent = movie.title; // Set movie title in modal
+      if(mvs.classList.contains("font-extrabold"))
+        {
+          movieTitle.textContent = movie.title; // Set movie title in modal
+          movieReleaseDate.textContent = `${movie.release_date}`; // Set release date in modal
+        }
+        else{
+          movieTitle.textContent = movie.original_name; // Set movie title in modal
+          movieReleaseDate.textContent = `${movie.first_air_date}`; // Set release date in modal
+        }
       moviePoster.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`; // Set movie poster in modal
-      moviePoster.alt = movie.title; // Set alt text for poster
+      moviePoster.alt = movie.original_title; // Set alt text for poster
       movieOverview.textContent = movie.overview; // Set movie overview in modal
-      movieReleaseDate.textContent = `${movie.release_date}`; // Set release date in modal
       movieRating.textContent = `${movie.vote_average}`; // Set movie rating in modal
       modal.style.display="flex"; // Show the modal
     } else {
@@ -114,26 +153,7 @@ function showMovieDetails(movieId) {
   xhr.send(); // Send the request
 }
 
-// Set up pagination buttons
-// function setupPagination(current, total) {
-//   paginationContainer.innerHTML = ''; // Clear existing pagination buttons
-//
-//   if (current > 1) { // If not on the first page, add a "Previous" button
-//     paginationContainer.innerHTML += `<button onclick="changePage(${current - 1})">Previous</button>`;
-//   }
-//
-//   paginationContainer.innerHTML += `<span>Page ${current} of ${total}</span>`; // Display current page and total pages
-//
-//   if (current < total) { // If not on the last page, add a "Next" button
-//     paginationContainer.innerHTML += `<button onclick="changePage(${current + 1})">Next</button>`;
-//   }
-// }
 
-// Change the current page and fetch movies for the new page
-function changePage(page) {
-  currentPage = page; // Update the current page
-  fetchTrendingMovies(currentPage); // Fetch movies for the new page
-}
 
 // Close the movie details modal
 var close=document.querySelector("#close");
@@ -160,13 +180,13 @@ function nextSlide() {
   if (currNumOfMovies <= 7) {
     currentPage += 1
     // Fetch and append new movies
+    
     fetchAndReturnMovies(currentPage, (moviesArr) => {
-      console.log(moviesArr);
       currNumOfMovies += moviesArr.length;
       moviesContainer.innerHTML += moviesArr.map(movie => `
     <div class="movie_card min-w-[200px] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.03] active:scale-[0.97]" movieId="${movie.id}">
     
-      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path} class="w-full block" alt="${movie.title}">
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path} class="w-full block">
     </div>
   `).join('');
     })
@@ -229,12 +249,11 @@ else if((localStorage.getItem('isLoggedIn') === 'true'))
   profile.innerHTML=localStorage.getItem("LoggedName");
 }
 
-console.log(topSection)
 
 moviesContainer.addEventListener('click', (event) => {
   movieId = event.target.closest(".movie_card").getAttribute("movieId")
   const xhr = new XMLHttpRequest();
-  const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
+  const url = `https://api.themoviedb.org/3/${type}/${movieId}?api_key=${API_KEY}`;
   xhr.open('GET', url, true);
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -248,8 +267,14 @@ moviesContainer.addEventListener('click', (event) => {
 
       // Use the backdrop URL (e.g., set it as a background image)
       topSection.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url(${backdropUrl})`
-      paragraphText.innerHTML = movieData.overview
-      headText.innerHTML = movieData.original_title
+      paragraphText.innerHTML = movieData.overview;
+      if(mvs.classList.contains("font-extrabold"))
+        {
+          headText.innerHTML = movieData.title;
+        }
+        else{
+          headText.innerHTML = movieData.original_name;
+        }
       detailsButton.setAttribute("movieId", movieId)
     } else {
       console.error('Error fetching movie details:', xhr.statusText);
@@ -270,13 +295,12 @@ detailsButton.addEventListener('click', (event) => {
 //=====================================================================================
 //filter section
 //=====================================================================================
-const urlForFelters = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=`
 
-
+var filter_btns=document.getElementById("filter_btns");
 
 async function fetchFilteredMovies(genreId) {
   try {
-      const response = await fetch(`${urlForFelters}${genreId}`);
+      const response = await fetch(`https://api.themoviedb.org/3/discover/${type}?api_key=${API_KEY}&with_genres=${genreId}`);
       const data = await response.json();
       displayFilteredMovies(data.results);
   } catch (error) {
@@ -292,14 +316,16 @@ function displayFilteredMovies(movies) {
     containerMoviesFiltered.innerHTML +=`
       <div class="movie_card min-w-[200px] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.03] active:scale-[0.97]" movieId="${movie.id}" onclick="showMovieDetails(${movie.id})">
     
-      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path} class="w-full block" alt="${movie.title}">
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path} class="w-full block">
     </div>
     `
   });
 }
 
 // Add event listeners to buttons
-const filteredMoviesHeader = document.querySelector(".filtered_movies_container h2");
+function fil_btns_events()
+{
+  const filteredMoviesHeader = document.querySelector(".filtered_movies_container h2");
 const buttons = document.querySelectorAll('.movie_categories_container .categories button');
 buttons.forEach(button => {
   button.addEventListener('click', () => {
@@ -313,9 +339,17 @@ buttons.forEach(button => {
       fetchFilteredMovies(genreId);
   });
 });
+}
+
+fil_btns_events();
+
+/////////////////////
+//search
+////////////////////
+
 function showMovieSearched(movieId) {
   const xhr = new XMLHttpRequest();
-  const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
+  const url = `https://api.themoviedb.org/3/${type}/${movieId}?api_key=${API_KEY}`;
   xhr.open('GET', url, true);
   xhr.onload = function () {
     if (xhr.status === 200) {
@@ -328,9 +362,17 @@ function showMovieSearched(movieId) {
 
       // Update movie details
       paragraphText.innerHTML = movieData.overview;
-      headText.innerHTML = movieData.original_title;
+      if(type=="movie")
+      {
+        headText.innerHTML = movieData.title;
+        searchInput.value = movieData.title; // Add this line
+      }
+      else
+      {
+        headText.innerHTML = movieData.original_name;
+        searchInput.value = movieData.original_name; // Add this line
+      }
       detailsButton.setAttribute('movieId', movieId);
-      searchInput.value = movieData.title; // Add this line
       // Clear search results and hide the list after selecting a movie
       searchResults.innerHTML = '';  // Clear the search results list
     } else {
@@ -350,10 +392,10 @@ async function searchMovies(query) {
     return;
   }
   try {
-    const response = await fetch(`${SEARCH_API}${query}`);
+    const response = await fetch(`https://api.themoviedb.org/3/search/${type}?api_key=${API_KEY}&query=${query}`);
     const data = await response.json();
     // Display movie names styled as per the design
-    searchResults.innerHTML = data.results
+      searchResults.innerHTML = data.results
       .map(
         (movie) => `
           <div
@@ -369,15 +411,16 @@ async function searchMovies(query) {
               />
             </div>
             <div>
-              <h6 class="text-slate-800 font-medium">${movie.title}</h6>
+              <h6 class="text-slate-800 font-medium">${type=="movie"?movie.title:movie.original_name}</h6>
               <p class="text-slate-500 text-sm">
-                Release Date: ${movie.release_date || 'N/A'}
+                Release Date: ${type=="movie"?movie.release_date:movie.first_air_date || 'N/A'}
               </p>
             </div>
           </div>
         `
       )
       .join('');
+    
   } catch (error) {
     console.error('Error fetching movies:', error);
   }
@@ -417,3 +460,32 @@ window.onscroll = function() {
 upButton.onclick = function() {
     document.documentElement.scrollTop = 0;
 };
+
+
+
+
+mvs.addEventListener("click",()=>{
+  window.location.href="dashboard.html";
+});
+
+const Tvs=document.getElementById("Tvs");
+Tvs.addEventListener("click",()=>{
+  clr_bold();
+  Tvs.classList.add("font-extrabold");
+  type="tv";
+  filter_btns.innerHTML=`<button class="active_button text-black bg-white font-bold" data-genre="">All Popular</button>
+  <button data-genre="35">Comedy</button>
+  <button data-genre="18">Drama</button>
+  <button data-genre="16">Animation</button>
+  <button data-genre="80">Crime</button>
+  <button data-genre="10749">Romance</button>`
+  fetchTrendingMovies(currentPage);
+  fetchFilteredMovies("");
+  fil_btns_events();
+});
+
+const People=document.getElementById("People");
+People.addEventListener("click",()=>{
+  clr_bold();
+  People.classList.add("font-extrabold");
+});

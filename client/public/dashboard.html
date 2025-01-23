@@ -19,10 +19,9 @@
             <i class="fa-solid fa-clapperboard text-[2.5rem]"></i>
             <div class="menu_items ml-[1.5rem]">
                 <ul class="flex list-none gap-[2rem] items-center text-[1.2rem]">
-                    <li><a href="#" class="relative text-xl text-white no-underline font-medium ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left">Home</a></li>
-                    <li><a href="#" class="relative text-xl text-white no-underline font-medium ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left">Movies</a></li>
-                    <li><a href="#" class="relative text-xl text-white no-underline font-medium ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left">Series</a></li>
-                    <li><a href="#" class="relative text-xl text-white no-underline font-medium ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left">Kids</a></li>
+                    <li><a href="#" class="relative text-xl text-white no-underline font-extrabold ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left" id="Mvs">Movies</a></li>
+                    <li><a href="#" class="relative text-xl text-white no-underline  ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left" id="Tvs">Tv shows</a></li>
+                    <li><a href="#" class="relative text-xl text-white no-underline  ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left" id="People">People</a></li>
                 </ul>
             </div>
         </div>
@@ -36,7 +35,7 @@
                   <input
                   id="searchInput"
                   class=" w-full bg-transparent placeholder:text-slate-400 text-white text-sm border border-slate-200 rounded-md pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-                  placeholder="Search for movie" 
+                  placeholder="Search....." 
                   />
                  
                 </div>
@@ -67,7 +66,7 @@
 
 <!--    Trending Movie Cards Container-->
     <div class="trending_movies_container relative overflow-hidden">
-        <h2 class="text-[2.3rem] mb-[1.5rem] text-white">Trending Movies</h2>
+        <h2 class="text-[2.3rem] mb-[1.5rem] text-white" id="trend_header"></h2>
         <div class="trending_movies_cards w-full flex gap-[20px] transition-transform duration-500 ease-in-out">
             
         </div>
@@ -98,7 +97,7 @@
 
 <!-- Movie Categories Section -->
 <div class="movie_categories_container pt-0 px-[2.3rem] pb-[2.3rem] bg-black">
-    <div class="categories [&>button]:px-[1.1rem] [&>button]:py-[0.5rem] [&>button]:text-[1.3rem] [&>button]:border-none [&>button]:cursor-pointer [&>button]:rounded-[2rem] [&>button]:text-white [&>button]:bg-[rgba(255,255,255,0.2)]">
+    <div class="categories [&>button]:px-[1.1rem] [&>button]:py-[0.5rem] [&>button]:text-[1.3rem] [&>button]:border-none [&>button]:cursor-pointer [&>button]:rounded-[2rem] [&>button]:text-white [&>button]:bg-[rgba(255,255,255,0.2)] " id="filter_btns">
         <button class="active_button text-black bg-white font-bold" data-genre="">All Popular</button>
         <button data-genre="28">Action</button>
         <button data-genre="35">Comedy</button>
@@ -124,13 +123,13 @@
     </div>
 </div>
 
-<!-- Loader -->
+<!-- Loader-->
 <div id="loader" class=" fixed top-0 left-0 w-full h-full bg-black visible flex justify-center items-center z-[100] bg-no-repeat bg-cover bg-center" style="background-image: url(assets/bat.jpg)">
     <div class="border-8 border-[rgba(0,0,0,0.1)] border-t-8 border-t-[#a82727] rounded-full w-[150px] h-[150px] animate-spin">
     </div>
 </div>
  <!-- Scroll to Top Button -->
- <button id="upButton" class="hidden fixed bottom-5 right-5 z-[99] border-none outline-none bg-red-500 text-white cursor-pointer p-[15px] pb-12 rounded-full text-[25px] w-[60px] h-[50px]  hover:bg-[rgb(100,15,15)]" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
+ <button id="upButton" class="hidden fixed bottom-5 right-5 z-[99] border-none outline-none bg-red-500 text-white cursor-pointer p-[15px] pb-12 rounded-full text-[25px] w-[60px] h-[50px] transition-all duration-500 ease-in-out hover:bg-[rgb(100,15,15)]" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
 
 <script src="../src/Dash.js"></script>
 
