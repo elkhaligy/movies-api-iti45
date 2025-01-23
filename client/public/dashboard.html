@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +10,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Movies</title>
 </head>
-<body>
-
-
-
+<body class="text-[#D8D8D8] bg-black">
 <!-- Top Section Including Navbar, Text and Trending Movies -->
-<div class="top_section">
+<div class="top_section pt-0 px-[2.3rem] pb-[2.3rem] flex flex-col gap-[6rem] bg-[linear-gradient(to_top,rgba(0,0,0,1),rgba(0,0,0,0)),url('')] bg-no-repeat bg-cover bg-center mb-[2rem]">
 <!--    Navigation Bar-->
-    <div class="navbar_container">
-        <div class="logo_and_menu">
-            <i class="fa-solid fa-clapperboard"></i>
-            <div class="menu_items">
-                <ul>
+    <div class="navbar_container flex items-center justify-between py-[1rem]">
+        <div class="logo_and_menu flex items-center gap-[2rem]">
+            <i class="fa-solid fa-clapperboard text-[2.5rem]"></i>
+            <div class="menu_items ml-[1.5rem]">
+                <ul class="flex list-none gap-[2rem] items-center text-[1.2rem]">
                     <li><a href="#" class="relative text-xl text-white no-underline font-medium ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left">Home</a></li>
                     <li><a href="#" class="relative text-xl text-white no-underline font-medium ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left">Movies</a></li>
                     <li><a href="#" class="relative text-xl text-white no-underline font-medium ml-10 after:content-[''] after:absolute after:left-0 after:-bottom-1.5 after:w-full after:h-[3px] after:bg-red-500 after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left">Series</a></li>
@@ -30,7 +27,7 @@
             </div>
         </div>
 
-        <div class="right_icons">
+        <div class="right_icons flex items-center gap-[2rem]">
                 <div class="relative w-72">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute  h-5 top-2.5 left-2.5 text-white">
                     <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
@@ -49,67 +46,60 @@
               >
         </div>
               
-            <div class="profile_picture" id="prof-name"></div>
-            <i id="ham"class="fas fa-bars menu-toggle"></i> <!-- Hamburger icon -->
+            <div class="p-[10px] w-auto h-[32px] bg-red-500 rounded-[20px] flex items-center justify-center text-white font-bold" id="prof-name"></div>
+            <i id="ham"class="hidden fas fa-bars menu-toggle  text-[1.5rem] cursor-pointer"></i> <!-- Hamburger icon -->
             <button class=" border-4 w-[130px] h-[50px] bg-transparent outline-none cursor-pointer rounded-lg text-xl text-white font-medium  transition-all duration-500 hover:bg-white hover:text-red-600 active:scale-90" id="logout">Logout</button>
         </div>
     </div>
 
 <!--    Movie Text-->
-    <div class="head_text_container">
-        <h2>Monsters, INC.</h2>
-        <p>Animated film that explores the world of Monstropolis,
+    <div class="head_text_container flex flex-col max-w-[700px]">
+        <h2 class="w-[700px] leading-[4rem] h-[150px] text-[4.5rem] text-white font-bold">Monsters, INC.</h2>
+        <p class="text-[1.3rem] mb-[2rem] h-[150px] w-[700px]">Animated film that explores the world of Monstropolis,
             where monsters generate their city's power by scaring
             children at night.</p>
         <div>
-            <button>Watch Now &nbsp; <i class="fa-solid fa-play"></i></button>
-            <button id="details-button" class="details-btn">Details &nbsp; <i class="fa-solid fa-chevron-right"></i></button>
+            <button class="text-black bg-white font-bold px-[1.5rem] py-[0.8rem] mr-[1rem] text-[1.2rem] border-none cursor-pointer rounded-[2rem]">Watch Now &nbsp; <i class="fa-solid fa-play"></i></button>
+            <button id="details-button" class="bg-[rgba(255,255,255,0.2)] px-[1.5rem] py-[0.8rem] mr-[1rem] text-[1.2rem] border-none cursor-pointer rounded-[2rem] text-white hover:text-red-600">Details &nbsp; <i class="fa-solid fa-chevron-right"></i></button>
 
         </div>
     </div>
 
 <!--    Trending Movie Cards Container-->
-    <div class="trending_movies_container">
-        <h2>Trending Movies</h2>
-        <div class="trending_movies_cards">
-<!--            <div class="movie_card">-->
-<!--                <img src="./assets/thegood.jpeg" alt="The Good Dinosaur Movie Poster">-->
-<!--            </div>-->
-
-
+    <div class="trending_movies_container relative overflow-hidden">
+        <h2 class="text-[2.3rem] mb-[1.5rem] text-white">Trending Movies</h2>
+        <div class="trending_movies_cards w-full flex gap-[20px] transition-transform duration-500 ease-in-out">
+            
         </div>
-<!--        <div class="pagination"></div>-->
 
-        <div class="slider_buttons">
-        <button class="prev" onclick="prevSlide()">&#10094;</button>
-        <button class="next" onclick="nextSlide()">&#10095;</button>
+        <div class="slider_buttons mt-[1rem] flex text-[2rem] justify-center items-center gap-[3rem]">
+        <button class="prev bg-none transition-all duration-200 ease-in-out hover:scale-105 active:scale-95" onclick="prevSlide()">&#10094;</button>
+        <button class="next bg-none transition-all duration-200 ease-in-out hover:scale-105 active:scale-95" onclick="nextSlide()">&#10095;</button>
         </div>
     </div>
 </div>
 
 <!--Movies Details Modal (Hidden By Default)-->
-<div class="detail">
-
-    <div class="mod-container" id="movieModal">
-        <div class="popup" >
-            <button class="close"><i class="fa-solid fa-x icon" title="Close"></i></button>
-            <h2 id="movieTitle"></h2>
-            <div class="all-info">
-                <img id="moviePoster" src="" alt="">
-                <div class="text-info">
-                    <p id="movieOverview"></p>
-                    <p><strong>Realease Date:</strong> <span id="movieReleaseDate"></span></p>
-                    <p><strong>Rating:</strong> <span id="movieRating"></span></p>
+    <div class="fixed top-0 left-0 bg-[rgba(99,98,98,0.7)] hidden justify-center items-center w-full h-full z-[1]" id="movieModal">
+        <div class="relative w-[90%] h-[95%] bg-gray-100 flex flex-col text-center items-center justify-evenly p-[60px] rounded-[20px]" >
+            <button class="absolute border-none p-[10px_20px] cursor-pointer rounded-[5px] bg-[rgba(151,25,25)] top-[15px] right-[15px] hover:bg-[rgba(151,25,25)] hover:scale-105 transition-transform duration-300 ease-in-out active:scale-95" id="close"><i class="fa-solid fa-x text-[24px] text-white bg-none " title="Close"></i></button>
+            <h2 id="movieTitle" class="text-[40px] font-bold font-mono text-red-500 uppercase"></h2>
+            <div class="flex">
+                <img id="moviePoster" src="" alt="" class="w-1/4 h-full rounded-[10px]">
+                <div class="flex flex-col justify-evenly items-center p-[40px]">
+                    <p id="movieOverview" class="text-[20px] font-semibold text-gray-600 font-mono"></p>
+                    <p class="text-[20px] font-semibold text-gray-600 font-mono"><strong class="text-red-600">Realease Date:</strong> <span id="movieReleaseDate"></span></p>
+                    <p class="text-[20px] font-semibold text-gray-600 font-mono"><strong class="text-red-600">Rating:</strong> <span id="movieRating"></span></p>
                 </div>
             </div>
         </div>      
     </div>
-</div>
+
 
 <!-- Movie Categories Section -->
-<div class="movie_categories_container">
-    <div class="categories">
-        <button class="active_button" data-genre="">All Popular</button>
+<div class="movie_categories_container pt-0 px-[2.3rem] pb-[2.3rem] bg-black">
+    <div class="categories [&>button]:px-[1.1rem] [&>button]:py-[0.5rem] [&>button]:text-[1.3rem] [&>button]:border-none [&>button]:cursor-pointer [&>button]:rounded-[2rem] [&>button]:text-white [&>button]:bg-[rgba(255,255,255,0.2)]">
+        <button class="active_button text-black bg-white font-bold" data-genre="">All Popular</button>
         <button data-genre="28">Action</button>
         <button data-genre="35">Comedy</button>
         <button data-genre="18">Drama</button>
@@ -122,14 +112,14 @@
         <button data-genre="10752">War</button>
     </div>
 
-    <div class="filtered_movies_container">
-        <h2>All Popular</h2>
-        <div class="filtered_movies_cards">
+    <div class="filtered_movies_container overflow-hidden">
+        <h2 class="text-[2.3rem] mb-[1.5rem] text-white">All Popular</h2>
+        <div class="filtered_movies_cards flex gap-[1.5rem] transition-transform duration-500 ease-in-out scroll-smooth">
             
         </div>
-        <div class="slider_buttons">
-            <button class="prev" onclick="prevSlide2()">&#10094;</button>
-            <button class="next" onclick="nextSlide2()">&#10095;</button>
+        <div class="slider_buttons mt-[1rem] flex text-[2rem] justify-center items-center gap-[3rem]">
+            <button class="prev bg-none transition-all duration-200 ease-in-out hover:scale-105 active:scale-95" onclick="prevSlide2()">&#10094;</button>
+            <button class="next bg-none transition-all duration-200 ease-in-out hover:scale-105 active:scale-95" onclick="nextSlide2()">&#10095;</button>
         </div>
     </div>
 </div>
@@ -139,6 +129,9 @@
     <div class="border-8 border-[rgba(0,0,0,0.1)] border-t-8 border-t-[#a82727] rounded-full w-[150px] h-[150px] animate-spin">
     </div>
 </div>
+ <!-- Scroll to Top Button -->
+ <button id="upButton" class="hidden fixed bottom-5 right-5 z-[99] border-none outline-none bg-red-500 text-white cursor-pointer p-[15px] pb-12 rounded-full text-[25px] w-[60px] h-[50px]  hover:bg-[rgb(100,15,15)]" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
+
 <script src="../src/Dash.js"></script>
 
 </body>

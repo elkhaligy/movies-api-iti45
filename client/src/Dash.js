@@ -78,10 +78,9 @@ function displayMovies(movies) {
 
   currNumOfMovies = movies.length;
   moviesContainer.innerHTML = movies.map(movie => `
-<!--    <div class="movie_card" onclick="showMovieDetails(${movie.id})">-->
-    <div class="movie_card" movieId="${movie.id}">
+    <div class="movie_card min-w-[200px] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.03] active:scale-[0.97]" movieId="${movie.id}">
     
-      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path} class="w-full block" alt="${movie.title}">
     </div>
   `).join(''); // Map through movies and create HTML for each movie card
 }
@@ -137,7 +136,7 @@ function changePage(page) {
 }
 
 // Close the movie details modal
-var close=document.querySelector(".close");
+var close=document.querySelector("#close");
     close.addEventListener('click',function(){
       modal.style.display="none"; 
        });
@@ -165,10 +164,9 @@ function nextSlide() {
       console.log(moviesArr);
       currNumOfMovies += moviesArr.length;
       moviesContainer.innerHTML += moviesArr.map(movie => `
-<!--    <div class="movie_card" onclick="showMovieDetails(${movie.id})">-->
-    <div class="movie_card" movieId="${movie.id}">
+    <div class="movie_card min-w-[200px] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.03] active:scale-[0.97]" movieId="${movie.id}">
     
-      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path} class="w-full block" alt="${movie.title}">
     </div>
   `).join('');
     })
@@ -292,9 +290,9 @@ function displayFilteredMovies(movies) {
 
   movies.forEach(movie => {
     containerMoviesFiltered.innerHTML +=`
-      <div class="movie_card" movieId="${movie.id}" onclick="showMovieDetails(${movie.id})">
+      <div class="movie_card min-w-[200px] rounded-[12px] overflow-hidden cursor-pointer transition-all duration-300 ease-in-out hover:scale-[1.03] active:scale-[0.97]" movieId="${movie.id}" onclick="showMovieDetails(${movie.id})">
     
-      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+      <img src="https://image.tmdb.org/t/p/w500${movie.poster_path} class="w-full block" alt="${movie.title}">
     </div>
     `
   });
@@ -406,3 +404,16 @@ setTimeout( () => {
   loaderDiv.classList.remove('visible');
   loaderDiv.classList.add('invisible');
     }, 1200)
+// button up
+const upButton = document.getElementById("upButton");
+window.onscroll = function() {
+    if (document.documentElement.scrollTop > 100) {
+        upButton.style.display = "block";
+    } else {
+        upButton.style.display = "none";
+    }
+};
+
+upButton.onclick = function() {
+    document.documentElement.scrollTop = 0;
+};
