@@ -15,7 +15,7 @@ const topSection = document.querySelector(".top_section");
 const headText = document.querySelector(".head_text_container h2");
 const paragraphText = document.querySelector(".head_text_container p");
 const detailsButton = document.getElementById("details-button");
-
+const loaderDiv = document.getElementById("loader")
 // Global Variables
 let currentPage = 1; // Current page for pagination
 let currNumOfMovies = 0;
@@ -400,6 +400,10 @@ searchInput.addEventListener('input', (e) => {
 // Fetch and display movies for the default genre (Action)
 fetchFilteredMovies(28);
 
+setTimeout( () => {
+  loaderDiv.classList.remove('visible');
+  loaderDiv.classList.add('invisible');
+    }, 1200)
 // button up
 const upButton = document.getElementById("upButton");
 window.onscroll = function() {
