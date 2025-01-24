@@ -1,25 +1,43 @@
+// Logout functionality
 
-var cats=document.getElementsByTagName("a");
-function clr_bold()
-{
-for(let i=0;i<cats.length;i++)
-{
-  if(cats[i].classList.contains("font-extrabold"))
+document.getElementById('logout').addEventListener('click', () => {
+  if((localStorage.getItem('isSignedIn') === 'true'))
   {
-    cats[i].classList.remove("font-extrabold");
+    localStorage.removeItem('isSignedIn'); // Clear login status
+    localStorage.removeItem("SignedName");
   }
-}
-}
-const mvs=document.getElementById("Mvs");
-var type;
-if(mvs.classList.contains("font-extrabold"))
+  else if((localStorage.getItem('isLoggedIn') === 'true'))
+  {
+    localStorage.removeItem('isLoggedIn'); // Clear login status
+    localStorage.removeItem("LoggedName");
+  }
+  window.location.href = 'index.html'; // Redirect to login page
+});
+
+var profile=document.getElementById("prof-name");
+if((localStorage.getItem('isSignedIn') === 'true'))
 {
-  type="movie";
+  profile.innerHTML=localStorage.getItem("SignedName")
 }
-else
+else if((localStorage.getItem('isLoggedIn') === 'true'))
 {
-  type="tv";
+  profile.innerHTML=localStorage.getItem("LoggedName");
 }
+
+////////////////////////////////
+
+// Check if the user is logged in when the page loads
+window.addEventListener('load', () => {
+  if (!(localStorage.getItem('isLoggedIn')) && !(localStorage.getItem('isSignedIn'))) {
+    window.location.href = 'index.html'; // Redirect to login page if not logged in
+  }
+});
+
+////////////////////////////
+
+var type="movie";    //default API category
+
+
 // Global Constants
 const API_KEY = '55cbc13ab085a4e63cc2241e374000db'; // API key for TMDB
 const searchInput = document.getElementById('searchInput');
@@ -97,7 +115,7 @@ function displayMovies(movies) {
   paragraphText.innerHTML = movieData.overview;
 const trend_header=document.getElementById("trend_header");
 
-  if(mvs.classList.contains("font-extrabold"))
+  if(type=="movie")
     {
       headText.innerHTML = movieData.title;
       trend_header.innerHTML= "Trending Movies";
@@ -127,7 +145,7 @@ function showMovieDetails(movieId) {
   xhr.onload = function () {
     if (xhr.status === 200) { // If the request is successful
       const movie = JSON.parse(xhr.responseText); // Parse the response JSON
-      if(mvs.classList.contains("font-extrabold"))
+      if(type=="movie")
         {
           movieTitle.textContent = movie.title; // Set movie title in modal
           movieReleaseDate.textContent = `${movie.release_date}`; // Set release date in modal
@@ -164,12 +182,6 @@ var close=document.querySelector("#close");
 // Fetch initial trending movies when the page loads
 fetchTrendingMovies(currentPage);
 
-// Check if the user is logged in when the page loads
-window.addEventListener('load', () => {
-  if (!(localStorage.getItem('isLoggedIn')) && !(localStorage.getItem('isSignedIn'))) {
-    window.location.href = 'index.html'; // Redirect to login page if not logged in
-  }
-});
 
 // Slider functionality for trending movies
 let currOffset = 0; // Current offset for sliding
@@ -223,31 +235,7 @@ function prevSlide2() {
   }
 }
 
-// Logout functionality
 
-document.getElementById('logout').addEventListener('click', () => {
-  if((localStorage.getItem('isSignedIn') === 'true'))
-  {
-    localStorage.removeItem('isSignedIn'); // Clear login status
-    localStorage.removeItem("SignedName");
-  }
-  else if((localStorage.getItem('isLoggedIn') === 'true'))
-  {
-    localStorage.removeItem('isLoggedIn'); // Clear login status
-    localStorage.removeItem("LoggedName");
-  }
-  window.location.href = 'index.html'; // Redirect to login page
-});
-
-var profile=document.getElementById("prof-name");
-if((localStorage.getItem('isSignedIn') === 'true'))
-{
-  profile.innerHTML=localStorage.getItem("SignedName")
-}
-else if((localStorage.getItem('isLoggedIn') === 'true'))
-{
-  profile.innerHTML=localStorage.getItem("LoggedName");
-}
 
 
 moviesContainer.addEventListener('click', (event) => {
@@ -268,7 +256,7 @@ moviesContainer.addEventListener('click', (event) => {
       // Use the backdrop URL (e.g., set it as a background image)
       topSection.style.backgroundImage = `linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url(${backdropUrl})`
       paragraphText.innerHTML = movieData.overview;
-      if(mvs.classList.contains("font-extrabold"))
+      if(type=="movie")
         {
           headText.innerHTML = movieData.title;
         }
@@ -443,6 +431,11 @@ searchInput.addEventListener('input', (e) => {
 // Fetch and display movies for the default genre (Action)
 fetchFilteredMovies(28);
 
+
+
+/////////////////
+//Loader
+////////////////
 setTimeout( () => {
   loaderDiv.classList.remove('visible');
   loaderDiv.classList.add('invisible');
@@ -464,8 +457,46 @@ upButton.onclick = function() {
 
 
 
+//////////////////
+//nav bar
+/////////////////
+
+function clr_bold()
+{
+  let cats=document.getElementsByTagName("a");
+for(let i=0;i<cats.length;i++)
+{
+  if(cats[i].classList.contains("font-extrabold"))
+  {
+    cats[i].classList.remove("font-extrabold");
+  }
+}
+}
+const mvs=document.getElementById("Mvs");
+
 mvs.addEventListener("click",()=>{
-  window.location.href="dashboard.html";
+  clr_bold();
+  mvs.classList.add("font-extrabold");
+  type="movie";
+  filter_btns.innerHTML=`<button class="active_button text-black bg-white font-bold" data-genre="">All Popular</button>
+        <button data-genre="28">Action</button>
+        <button data-genre="35">Comedy</button>
+        <button data-genre="18">Drama</button>
+        <button data-genre="10402">Music</button>
+        <button data-genre="12">Adventure</button>
+        <button data-genre="16">Animation</button>
+        <button data-genre="80">Crime</button>
+        <button data-genre="27">Horror</button>
+        <button data-genre="10749">Romance</button>
+        <button data-genre="10752">War</button>`;
+        currentPage=1;
+        currOffset=0;
+        currOffset2=0;
+        currNumOfMovies=0;
+        moviesContainer.style.transform = `translateX(${currOffset}px)`;
+  fetchTrendingMovies(currentPage);
+  fetchFilteredMovies("");
+  fil_btns_events();
 });
 
 const Tvs=document.getElementById("Tvs");
@@ -478,7 +509,12 @@ Tvs.addEventListener("click",()=>{
   <button data-genre="18">Drama</button>
   <button data-genre="16">Animation</button>
   <button data-genre="80">Crime</button>
-  <button data-genre="10749">Romance</button>`
+  <button data-genre="10749">Romance</button>`;
+  currentPage=1;
+  currOffset=0;
+  currOffset2=0;
+  currNumOfMovies=0;
+  moviesContainer.style.transform = `translateX(${currOffset}px)`;
   fetchTrendingMovies(currentPage);
   fetchFilteredMovies("");
   fil_btns_events();
