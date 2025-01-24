@@ -37,7 +37,7 @@ reg_link.addEventListener("click", () => {
 
 function ValidateEmail(InputElement, box) {
     InputElement.addEventListener("input", function () {
-        const regex = /[a-zA-Z]+@[a-zA-Z0-9]+\.[a-z]{2,3}/;
+        const regex = /[a-zA-Z0-9]+@[a-zA-Z]+\.[a-z]{2,3}/;
         box.classList.remove("border-b-[rgb(120,122,120)]");
 
         if (regex.test(InputElement.value)) {

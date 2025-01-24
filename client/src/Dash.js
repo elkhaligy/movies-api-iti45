@@ -472,11 +472,28 @@ for(let i=0;i<cats.length;i++)
   }
 }
 }
+
+
+/////////////////////////////////////
+// to reset when navigating
+////////////////////////////////////
+function reset()
+{
+  clr_bold();
+  currentPage=1;
+        currOffset=0;
+        currOffset2=0;
+        currNumOfMovies=0;
+        moviesContainer.style.transform = `translateX(${currOffset}px)`;
+        filteredMoviesContainer.style.transform = `translateX(${currOffset2}px)`; // Apply the transformation
+  fetchTrendingMovies(currentPage);
+  fetchFilteredMovies("");
+  fil_btns_events();
+  document.getElementById("genre_filter").innerHTML="All Popular";
+}
 const mvs=document.getElementById("Mvs");
 
 mvs.addEventListener("click",()=>{
-  clr_bold();
-  mvs.classList.add("font-extrabold");
   type="movie";
   filter_btns.innerHTML=`<button class="active_button text-black bg-white font-bold" data-genre="">All Popular</button>
         <button data-genre="28">Action</button>
@@ -489,20 +506,12 @@ mvs.addEventListener("click",()=>{
         <button data-genre="27">Horror</button>
         <button data-genre="10749">Romance</button>
         <button data-genre="10752">War</button>`;
-        currentPage=1;
-        currOffset=0;
-        currOffset2=0;
-        currNumOfMovies=0;
-        moviesContainer.style.transform = `translateX(${currOffset}px)`;
-  fetchTrendingMovies(currentPage);
-  fetchFilteredMovies("");
-  fil_btns_events();
+        reset();
+        mvs.classList.add("font-extrabold");   
 });
 
 const Tvs=document.getElementById("Tvs");
 Tvs.addEventListener("click",()=>{
-  clr_bold();
-  Tvs.classList.add("font-extrabold");
   type="tv";
   filter_btns.innerHTML=`<button class="active_button text-black bg-white font-bold" data-genre="">All Popular</button>
   <button data-genre="35">Comedy</button>
@@ -510,14 +519,9 @@ Tvs.addEventListener("click",()=>{
   <button data-genre="16">Animation</button>
   <button data-genre="80">Crime</button>
   <button data-genre="10749">Romance</button>`;
-  currentPage=1;
-  currOffset=0;
-  currOffset2=0;
-  currNumOfMovies=0;
-  moviesContainer.style.transform = `translateX(${currOffset}px)`;
-  fetchTrendingMovies(currentPage);
-  fetchFilteredMovies("");
-  fil_btns_events();
+  reset();
+  Tvs.classList.add("font-extrabold");
+ 
 });
 
 const People=document.getElementById("People");
