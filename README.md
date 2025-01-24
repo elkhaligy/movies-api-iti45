@@ -9,20 +9,22 @@ A web application that allows users to explore trending movies and TV shows, reg
 ```
 movie-app/
 ├── client/                     # Frontend code
-│   ├── public/                 # HTML files
-│   │   ├── index.html          # Main page
-│   │   ├── login.html          # Login page
-│   │   ├── register.html       # Registration page
-│   │   ├── home.html           # Home page (trending movies/TV shows)
-│   │   └── details.html        # Details page for a movie/TV show
+│   ├── public/                 # HTML files and assets
+│   │   ├── assets/             # Folder for all Images used in styling   
+│   │   ├── index.html          # Main page for login and registration
+│   │   ├── about.html          # about us page
+│   │   ├── contact.html        # Contact us page
+│   │   ├── dashboard.html      # Dahboard page (trending movies/TV shows)
+│   │   |
 │   └── src/
 │       ├── styles/             # CSS files
+│       │   ├── dashboard.css   # Some media Queries and scroll bar style
 │       │   ├── input.css       # Tailwind source CSS file
 │       │   └── output.css      # Compiled Tailwind CSS file
 │       └── js/                 # JavaScript files
 │           ├── auth.js         # Authentication logic
-│           ├── movies.js       # Movie/TV show logic
-│           └── details.js      # Details page logic
+│           └── Dash.js         # Movie/TV shows logic, Details Modal logic
+|
 ├── server/                     # Backend mock data
 │   └── db.json                 # JSON Server database
 ├── package.json                # npm project configuration
@@ -41,7 +43,7 @@ movie-app/
 - **Trending Movies/TV Shows**:
     - Browse trending movies, TV shows, and people.
     - Pagination support for browsing through results.
-- **Details Page**:
+- **Details Modal**:
     - View detailed information about a specific movie or TV show.
 - **Responsive Design**:
     - Built with **Tailwind CSS** for a clean and responsive UI.
@@ -106,19 +108,19 @@ npx tailwindcss -i ./client/src/styles/input.css -o ./client/src/styles/output.c
 ## **How to Use**
 
 1. **Register**:
-    - Navigate to the registration page (`register.html`).
-    - Enter a username and password to create an account.
+    - Navigate to the registration form (`index.html`).
+    - Enter a username, email, and password to create an account.
 
 2. **Login**:
-    - Navigate to the login page (`login.html`).
+    - Navigate to the login form (`index.html`).
     - Enter your credentials to log in.
 
 3. **Browse Trending Content**:
-    - On the home page (`home.html`), browse trending movies, TV shows, or people.
+    - On the Dashboard page (`dashboard.html`), browse trending movies, TV shows, or people.
     - Use the dropdown to switch between categories.
 
 4. **View Details**:
-    - Click on a movie or TV show to view its details on the `details.html` page.
+    - Click on a movie or TV show to view its details.
 
 ---
 

@@ -403,7 +403,7 @@ fetchFilteredMovies(28);
 setTimeout( () => {
   loaderDiv.classList.remove('visible');
   loaderDiv.classList.add('invisible');
-    }, 1200)
+    }, 2500)
 // button up
 const upButton = document.getElementById("upButton");
 window.onscroll = function() {
