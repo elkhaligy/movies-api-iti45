@@ -718,6 +718,10 @@ video {
   margin-top: 0.625rem;
 }
 
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .mt-\[1rem\] {
   margin-top: 1rem;
 }
@@ -854,8 +858,8 @@ video {
   min-width: 200px;
 }
 
-.max-w-\[700px\] {
-  max-width: 700px;
+.max-w-4xl {
+  max-width: 56rem;
 }
 
 .translate-x-0 {
@@ -905,12 +909,6 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.select-none {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
 }
 
 .list-none {
@@ -1120,10 +1118,6 @@ video {
   background-image: url('../../public/assets/back.jpg');
 }
 
-.bg-\[url\(\'\.\.\/\.\.\/public\/assets\/bat\.jpg\'\)\] {
-  background-image: url('../../public/assets/bat.jpg');
-}
-
 .bg-none {
   background-image: none;
 }
@@ -1307,6 +1301,10 @@ video {
   font-size: 40px;
 }
 
+.text-\[6rem\] {
+  font-size: 6rem;
+}
+
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -1325,6 +1323,14 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-\[3\.5rem\] {
+  font-size: 3.5rem;
+}
+
+.text-\[3rem\] {
+  font-size: 3rem;
 }
 
 .font-bold {
